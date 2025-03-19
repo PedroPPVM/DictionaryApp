@@ -1,19 +1,22 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { View, FlatList, RefreshControl, StyleSheet, Text } from "react-native";
-import { getViewedWords } from "../../storage/wordStorage";
-import { BallIndicator } from "react-native-indicators";
-import WordCard from "./components/WordCard";
-import Icon from "react-native-vector-icons/Feather";
+import React, { useCallback, useMemo, useState } from 'react';
+import { View, FlatList, RefreshControl, StyleSheet, Text } from 'react-native';
+import { getViewedWords } from '../../storage/wordStorage';
+import { BallIndicator } from 'react-native-indicators';
+import WordCard from './components/WordCard';
+import Icon from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
-import { useFocusEffect } from "@react-navigation/native";
-import { WordInfo } from "../../api/dictionaryApp";
+import { useFocusEffect } from '@react-navigation/native';
+import { WordInfo } from '../../api/dictionaryApp';
 
 const ViewedWordsScreen = () => {
   const [words, setWords] = useState<WordInfo[]>([]);
   const [isLoadingWords, setIsLoadingWords] = useState<boolean>(false);
   const [isLoadingRefresh, setIsLoadingRefresh] = useState<boolean>(false);
 
-  const sortedWords = useMemo(() => words.sort((left, right) => left.word.localeCompare(right.word)),[words])
+  const sortedWords = useMemo(
+    () => words.sort((left, right) => left.word.localeCompare(right.word)),
+    [words]
+  );
 
   const loadWords = useCallback(async () => {
     setIsLoadingWords(true);
@@ -24,7 +27,7 @@ const ViewedWordsScreen = () => {
 
     setIsLoadingWords(false);
     setIsLoadingRefresh(false);
-  },[])
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
@@ -45,18 +48,24 @@ const ViewedWordsScreen = () => {
         </View>
       ) : (
         <FlatList
-          data={sortedWords} 
+          data={sortedWords}
           renderItem={({ item }) => (
-            <Animatable.View animation="zoomInUp" iterationCount={1} direction="alternate" key={item.word} style={{width: '100%'}}>
-              <WordCard wordData={item} onRefresh={loadWords}/>
+            <Animatable.View
+              animation="zoomInUp"
+              iterationCount={1}
+              direction="alternate"
+              key={item.word}
+              style={{ width: '100%' }}
+            >
+              <WordCard wordData={item} onRefresh={loadWords} />
             </Animatable.View>
           )}
           keyExtractor={(item) => item.word}
           contentContainerStyle={sortedWords.length === 0 ? { flex: 1 } : {}}
           ListEmptyComponent={() => (
-            <Animatable.View 
-              animation="pulse" 
-              easing="ease-out" 
+            <Animatable.View
+              animation="pulse"
+              easing="ease-out"
               iterationCount="infinite"
               style={styles.emptyContainer}
             >
@@ -83,23 +92,23 @@ const ViewedWordsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex', 
+    display: 'flex',
     width: '100%',
-    height: '100%', 
-    paddingTop: 65, 
-    paddingHorizontal: 10, 
-    backgroundColor: "#F2F6F5" ,
+    height: '100%',
+    paddingTop: 65,
+    paddingHorizontal: 10,
+    backgroundColor: '#F2F6F5',
   },
   loadingBox: {
-    display: 'flex', 
-    width: '100%', 
+    display: 'flex',
+    width: '100%',
     height: '100%',
   },
   emptyContainer: {
-    display: 'flex', 
-    alignItems: 'center', 
+    display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
-    height: '100%', 
+    height: '100%',
     gap: 10,
   },
 });

@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+const API_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
 export interface Meaning {
   partOfSpeech: string;
@@ -10,8 +10,8 @@ export interface Meaning {
       example: string;
       synonyms: string[];
       antonyms: string[];
-    }
-  ]
+    },
+  ];
 }
 
 export interface WordInfo {
@@ -19,7 +19,7 @@ export interface WordInfo {
   phonetic: string;
   phonetics: [
     {
-      text: string
+      text: string;
     },
   ];
   origin: string;
@@ -29,7 +29,7 @@ export interface WordInfo {
 export const fetchWordData = async (word: string) => {
   try {
     const response = await axios.get(`${API_URL}${word}`);
-    
+
     return response.data as WordInfo[];
   } catch (error) {
     return null;

@@ -24,8 +24,6 @@
     "web": {
       "favicon": "./assets/book.png"
     },
-    "plugins": [
-      "expo-font"
-    ]
+    "plugins": ["expo-font"]
   }
 }

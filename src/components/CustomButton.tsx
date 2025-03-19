@@ -1,6 +1,6 @@
-import React from "react";
-import { TouchableOpacity, Text, StyleSheet, Vibration } from "react-native";
-import { BallIndicator } from "react-native-indicators";
+import React from 'react';
+import { TouchableOpacity, Text, StyleSheet, Vibration } from 'react-native';
+import { BallIndicator } from 'react-native-indicators';
 
 interface CustomButtonProps {
   title: string;
@@ -9,7 +9,12 @@ interface CustomButtonProps {
   isDisabled?: boolean;
 }
 
-const CustomButton = ({ title, isLoading, isDisabled, onPress }: CustomButtonProps) => {
+const CustomButton = ({
+  title,
+  isLoading,
+  isDisabled,
+  onPress,
+}: CustomButtonProps) => {
   const onPressButton = () => {
     Vibration.vibrate(100);
 
@@ -17,7 +22,11 @@ const CustomButton = ({ title, isLoading, isDisabled, onPress }: CustomButtonPro
   };
 
   return (
-    <TouchableOpacity style={styles.button} onPress={onPressButton} disabled={isDisabled || isLoading}>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={onPressButton}
+      disabled={isDisabled || isLoading}
+    >
       {isLoading ? (
         <BallIndicator size={22} color="white" />
       ) : (
@@ -29,15 +38,15 @@ const CustomButton = ({ title, isLoading, isDisabled, onPress }: CustomButtonPro
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#273469",
-    display: "flex",
+    backgroundColor: '#273469',
+    display: 'flex',
     justifyContent: 'center',
     borderRadius: 10,
-    alignItems: "center",
+    alignItems: 'center',
     height: 50,
   },
   text: {
-    color: "#f2f6f5",
+    color: '#f2f6f5',
     fontSize: 16,
     fontFamily: 'RobotoBold',
   },

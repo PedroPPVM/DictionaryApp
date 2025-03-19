@@ -9,16 +9,28 @@ interface CustomInputProps {
   onChangeText: (text: string) => void;
 }
 
-export default function CustomInput({ icon, placeholder, value, onChangeText }: CustomInputProps) {
+export default function CustomInput({
+  icon,
+  placeholder,
+  value,
+  onChangeText,
+}: CustomInputProps) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
-  
+
   return (
     <View style={[styles.container, isFocused && styles.inputFocus]}>
-      {icon && <Icon name={icon} size={20} color={isFocused ? "#273469" : "#888"} style={styles.icon} />}
-      
+      {icon && (
+        <Icon
+          name={icon}
+          size={20}
+          color={isFocused ? '#273469' : '#888'}
+          style={styles.icon}
+        />
+      )}
+
       <TextInput
         style={styles.input}
         placeholder={placeholder}
@@ -52,5 +64,5 @@ const styles = StyleSheet.create({
   },
   inputFocus: {
     borderColor: '#273469',
-  }
+  },
 });
